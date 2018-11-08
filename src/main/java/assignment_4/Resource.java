@@ -29,7 +29,7 @@ public class Resource {
             }
         }
         Connection removedConnection = buffer.remove(0);
-        System.out.println("Consumed: " + removedConnection);
+        System.out.println("Consumed: " + removedConnection+" by "+Thread.currentThread().getName());
         notifyAll();
         return removedConnection;
     }

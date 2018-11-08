@@ -20,16 +20,11 @@ public class Producer implements Runnable {
         while (true) {
             Connection connection = null;
             try {
-                connection=dbConnection.getConnection();
+                connection = dbConnection.getConnection();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             buffer.produce(connection);
-            try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

@@ -18,11 +18,6 @@ public class Consumer implements Runnable {
         while (true) {
             connection = buffer.consume();
             try {
-                sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            try {
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
