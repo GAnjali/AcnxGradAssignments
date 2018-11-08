@@ -1,21 +1,30 @@
 package assignment_4;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import static java.lang.Thread.sleep;
 
 public class Producer implements Runnable {
     Resource buffer;
-    int item;
+    DBConnection dbConnection;
 
-    public Producer(Resource buffer, int item) {
+    public Producer(Resource buffer, DBConnection dbConnection) {
         this.buffer = buffer;
-        this.item = item;
+        this.dbConnection = dbConnection;
     }
 
 
     @Override
     public void run() {
-        while (item < 5) {
-            buffer.produce(item++);
+        while (true) {
+            Connection connection = null;
+            try {
+                connection=dbConnection.getConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            buffer.produce(connection);
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
