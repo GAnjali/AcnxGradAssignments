@@ -3,8 +3,6 @@ package assignment_4;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static java.lang.Thread.sleep;
-
 public class Producer implements Runnable {
     Resource buffer;
     DBConnection dbConnection;
@@ -18,13 +16,11 @@ public class Producer implements Runnable {
     @Override
     public void run() {
         while (true) {
-            Connection connection = null;
             try {
-                connection = dbConnection.getConnection();
+                buffer.produce(dbConnection);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            buffer.produce(connection);
         }
     }
 }
